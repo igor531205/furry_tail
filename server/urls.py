@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from store.views import IndexView
+from catalog.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
