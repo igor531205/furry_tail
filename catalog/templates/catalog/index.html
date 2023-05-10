@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
 
+{% load static %}
+
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>{{ title }}</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Nunito&display=swap');
   </style>
-  <link rel="stylesheet" href="style.css">
+  <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
   <div class="wrapper">
     <div class="header" id="up">
       <div class="right">
-        <div class="logo"><a href="index.html"></a></div>
+        <div class="logo"><a href="{% url 'index' %}"></a></div>
         <button class="pets button"><a href="">Ищут дом</a></button>
       </div>
       <div class="buttons">
@@ -28,15 +31,15 @@
     </div>
     <div class="mainBody">
       <div class="input_wrapper">
-        <img src="img/FTLogoPic.svg" alt="" class="input_pic">
+        <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
         <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
         <button class="search button">Искать</button>
       </div>
-      <img src="img/FTBgi.svg" alt="" class="bgi">
+      <img src="{% static 'img/FTBgi.svg' %}" alt="" class="bgi">
     </div>
     <div class="footer">
       <div class="right">
-        <div class="logo dark"><a href="index.html"></a></div>
+        <div class="logo dark"><a href="{% url 'index' %}"></a></div>
       </div>
       <div class="up"><a href="#up">^</a></div>
     </div>
