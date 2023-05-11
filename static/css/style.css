@@ -22,7 +22,7 @@
 }
 
 .logo {
-  background-image: url(img/FTLogo.svg);
+  background-image: url("/static/img/FTLogo.svg");
   background-repeat: no-repeat;
   width: 213px;
   height: 71px;
@@ -35,7 +35,7 @@
   height: 71px;
 }
 .logo.dark {
-  background-image: url(img/FTLogoDark.svg);
+  background-image: url("/static/img/FTLogoDark.svg");
 }
 
 .right {
