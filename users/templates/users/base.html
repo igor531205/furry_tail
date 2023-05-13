@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="{% static 'store/img/user.png' %}" type="image/png">
+    <link href="{% static 'store/css/auth.css' %}" rel="stylesheet" />
+    <script src="{% static 'store/fontawesome/all.min.js' %}" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <script src="{% static 'store/jquery/jquery.slim.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'store/bootstrap/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'store/js/auth.js' %}"></script>
+</body>
+
+</html>

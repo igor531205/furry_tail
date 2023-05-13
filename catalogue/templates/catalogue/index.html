@@ -21,12 +21,16 @@
     <div class="header" id="up">
       <div class="right">
         <div class="logo"><a href="{% url 'index' %}"></a></div>
-        <button class="pets button"><a href="catalogue.html">Ищут дом</a></button>
+        <button class="pets button"><a href="{% url 'catalogue:index' %}">Ищут дом</a></button>
       </div>
       <div class="buttons">
-        <button class="favourite button"> <a href="favorites.html">Избранные</a></button>
-        <button class="signin button"><a href="login.html">Войти</a></button>
-        <button class="signup button"><a href="register.html">Регистрация</a></button>
+        {% if user.is_authenticated %}
+          <button class="favourite button"> <a href="{% url 'users:favorites' %}">Избранные</a></button>
+          <button class="signup button"><a href="{% url 'users:logout' %}">Выйти</a></button>
+        {% else %}
+          <button class="signin button"><a href="{% url 'users:login' %}">Войти</a></button>
+          <button class="signup button"><a href="{% url 'users:registration' %}">Регистрация</a></button>
+        {% endif %}
       </div>
 
     </div>

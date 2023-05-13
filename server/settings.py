@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'catalog',
+    'catalogue',
     'users',
 
 ]
@@ -186,5 +186,5 @@ else:
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/catalogue/'
 LOGOUT_REDIRECT_URL = '/'

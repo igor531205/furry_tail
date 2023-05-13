@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegistrationForm
 from users.models import User, EmailVerification
 from common.views import TitleMixin
 
@@ -41,3 +41,8 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('index'))
+
+
+class UserFavoritesView(TitleMixin, TemplateView):
+    template_name = 'users/favorites.html'
+    title = 'Избранное'
