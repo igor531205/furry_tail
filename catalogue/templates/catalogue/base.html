@@ -1,23 +1,5 @@
-{% extends 'catalogue/base.html' %}
 {% load static %}
 
-{% block css %}
-  <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
-{% endblock %}
-
-{% block body %}
-  <div class="mainBody">
-      <div class="input_wrapper">
-        <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
-        <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
-        <button class="search button">Искать</button>
-      </div>
-      <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
-    </div>
-{% endblock %}
-
-
-<!--
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,8 +11,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Nunito&display=swap');
   </style>
-  <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block css %} {% endblock %}
 </head>
 
 <body>
@@ -49,23 +31,21 @@
           <button class="signup button"><a href="{% url 'users:registration' %}">Регистрация</a></button>
         {% endif %}
       </div>
+    </div>
 
-    </div>
-    <div class="mainBody">
-      <div class="input_wrapper">
-        <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
-        <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
-        <button class="search button">Искать</button>
-      </div>
-      <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
-    </div>
-    <div class="footer">
-      <div class="right">
-        <div class="logo dark"><a href="{% url 'index' %}"></a></div>
-      </div>
-      <div class="up"><a href="#up">^</a></div>
-    </div>
+    {% block body %} {% endblock %}
+
   </div>
 </body>
+
+{% block content %} {% endblock %}
+
+<footer class="footer">
+  <div class="right">
+    <div class="logo dark"><a href="{% url 'index' %}"></a></div>
+  </div>
+  <div class="up"><a href="#up">^</a></div>
+  {% block footer %} {% endblock %}
+</footer>
 
 </html>
