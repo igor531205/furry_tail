@@ -37,6 +37,9 @@
 .logo.dark {
   background-image: url("/static/img/FTLogoDark.svg");
 }
+.logo:hover {
+  cursor: pointer;
+}
 
 .right {
   position: absolute;
@@ -52,7 +55,7 @@
   display: flex;
   right: 50px;
   width: 30%;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .button {
@@ -163,4 +166,59 @@
   padding: 39%;
   font-size: 20px;
   font-weight: bold;
+}
+
+.form_wrap {
+  position: absolute;
+  width: 30%;
+  height: 90%;
+  left: 15vw;
+  top: 4vh;
+  border: 1px solid rgb(164, 164, 164);
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  overflow: scroll;
+}
+.form_wrap h1 {
+  font-size: 50;
+}
+.form_wrap.login {
+  height: 50%;
+  left: 15vw;
+  top: 15vh;
+}
+
+.form_container {
+  width: 70%;
+  height: 90%;
+  left: 7%;
+  top: 5%;
+  position: absolute;
+}
+.form_container .input_text {
+  height: 7%;
+  left: 0vw;
+}
+.form_container.login {
+  height: 100%;
+}
+
+.form_data {
+  margin-bottom: 3vh;
+}
+.form_data button {
+  margin-bottom: 2vh;
+}
+
+.form_data.login {
+  margin-top: 1vh;
+}
+.form_data.login .input_text {
+  margin-top: 1vh;
+  height: 10%;
+}
+
+#orange {
+  accent-color: #FF9F00;
 }/*# sourceMappingURL=style.css.map */

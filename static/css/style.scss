@@ -43,6 +43,10 @@ $width_site: 100vw;
     &.dark {
         background-image: url("/static/img/FTLogoDark.svg");
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .right {
@@ -59,7 +63,7 @@ $width_site: 100vw;
     display: flex;
     right: 50px;
     width: 30%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .button {
@@ -171,3 +175,114 @@ $width_site: 100vw;
         font-weight: bold;
     }
 }
+
+.form_wrap {
+    position: absolute;
+    width: 30%;
+    height: 90%;
+    left: 15vw;
+    top: 4vh;
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    overflow: scroll;
+
+    h1 {
+        font-size: 50;
+    }
+
+    &.login {
+        height: 50%;
+        left: 15vw;
+        top: 15vh;
+    }
+}
+
+.form_container {
+    width: 70%;
+    height: 90%;
+    left: 7%;
+    top: 5%;
+    position: absolute;
+
+    .input_text {
+        height: 7%;
+        left: 0vw;
+    }
+
+    &.login {
+        height: 100%;
+    }
+}
+
+.form_data {
+    margin-bottom: 3vh;
+
+    button {
+        margin-bottom: 2vh;
+    }
+
+}
+
+.form_data.login {
+    margin-top: 1vh;
+
+    .input_text {
+        margin-top: 1vh;
+        height: 10%;
+    }
+}
+
+#orange {
+    accent-color: #FF9F00;
+}
+
+// label:checked {
+//     color: rgba(0, 0, 0, 0.25);
+// }
+
+// .form_data:checked~label {
+//     color: rgba(0, 0, 0, 0.25);
+// }
+
+// input:checked+label {
+//     color: red;
+// }
+
+// label+input[type="radio"]:checked {
+//     color: #FF9F00;
+//     // font-weight: bold;
+//     // background: blue;
+// }
+
+// .sex:focus {
+//     color: #FF9F00;
+// }
+
+// label {
+//     transition: all 0.3s ease;
+// }
+
+// input,
+// select,
+// textarea {
+//     transition: all 0.3s ease;
+
+//     &:focus {
+//         border-color: #FF9F00;
+
+//         +label {
+//             color: #FF9F00
+//         }
+//     }
+// }
+
+// .input_text:focus {
+//     transition: all 0.3s ease;
+//     border-color: #FF9F00;
+// }
+
+// input[type="radio"] {
+//     color: #FF9F00;
+// }

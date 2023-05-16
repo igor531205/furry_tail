@@ -19,16 +19,18 @@
   <div class="wrapper">
     <div class="header" id="up">
       <div class="right">
-        <div class="logo"><a href="{% url 'index' %}"></a></div>
-        <button class="pets button"><a href="{% url 'catalogue:index' %}">Ищут дом</a></button>
+        <div class="logo" onclick="window.location.href = '{% url 'index' %}'"></div>
+        <button class="pets button" onclick="window.location.href = '{% url 'catalogue:index' %}'">Ищут дом</button>
       </div>
       <div class="buttons">
         {% if user.is_authenticated %}
-          <button class="favourite button"> <a href="{% url 'users:favorites' %}">Избранные</a></button>
-          <button class="signup button"><a href="{% url 'users:logout' %}">Выйти</a></button>
+        <button class="favourite button"
+          onclick="window.location.href = '{% url 'users:favorites' %}'">Избранные</button>
+        <button class="signup button" onclick="window.location.href = '{% url 'users:logout' %}'">Выйти</button>
         {% else %}
-          <button class="signin button"><a href="{% url 'users:login' %}">Войти</a></button>
-          <button class="signup button"><a href="{% url 'users:registration' %}">Регистрация</a></button>
+        <button class="signin button" onclick="window.location.href = '{% url 'users:login' %}'">Войти</button>
+        <button class="signup button"
+          onclick="window.location.href = '{% url 'users:registration' %}'">Регистрация</button>
         {% endif %}
       </div>
     </div>
