@@ -2,9 +2,16 @@ $height_site: 100vh;
 $width_site: 100vw;
 
 .wrapper {
-    height: 100vh;
+    // min-height: 100vh;
     width: 100vw;
+    height: 100vh;
+    // display: flex;
+    // flex-direction: column;
 }
+
+// .top {
+//     flex-grow: 1;
+// }
 
 * {
     margin: 0;
@@ -18,6 +25,7 @@ $width_site: 100vw;
     height: 12vh;
     width: $width_site;
     background-color: #FF9F00;
+    // background-color: #413e39;
     position: relative;
     display: flex;
     align-items: center;
@@ -237,6 +245,8 @@ $width_site: 100vw;
 #orange {
     accent-color: #FF9F00;
 }
+
+
 
 // label:checked {
 //     color: rgba(0, 0, 0, 0.25);
