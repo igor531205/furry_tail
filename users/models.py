@@ -36,5 +36,5 @@ class EmailVerification(models.Model):
             fail_silently=False,
         )
 
-    def is_active(self):
-        return True if now() < self.expiration else False
+    def is_expired(self):
+        return True if now() >= self.expiration else False
