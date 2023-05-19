@@ -19,12 +19,12 @@ class EmailVerification(models.Model):
     expiration = models.DateTimeField()
 
     def __str__(self):
-        return f'EmailVerification object for {self.user.email}'
+        return f'EmailVerification object for {self.user.username}'
 
     def send_verification_email(self):
         link = reverse('users:email_verification',
-                       kwargs={'email': self.user.email, 'code': self.code})
-        verification_link = f'{settings.DOMAIN_NAME}{link}'
+                       kwargs={'username': self.user.username, 'code': self.code})
+        verification_link = f'https://{settings.DOMAIN_NAME}{link}'
         subject = f'Подтверждение учетной записи для {self.user.username}'
         message = f'{self.user.username}, для подтверждения учетной записи ' +\
             f'{self.user.email} перейдите по ссылке: {verification_link}'

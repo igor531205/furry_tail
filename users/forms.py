@@ -39,9 +39,9 @@ class UserRegistrationForm(UserCreationForm):
     sex = forms.CharField(widget=forms.RadioSelect(
         attrs={'name': 'sex', 'class': 'sex', 'id': 'orange'}, choices=SEX_CHOICES
     ))
-    sex2 = forms.CharField(widget=forms.Select(
-        attrs={'name': 'sex', 'class': 'sex', 'id': 'orange'}, choices=SEX_CHOICES
-    ))
+    # sex2 = forms.CharField(widget=forms.Select(
+    #     attrs={'name': 'sex', 'class': 'sex', 'id': 'orange'}, choices=SEX_CHOICES
+    # ))
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'input_text password', 'placeholder': 'Введите пароль'}
     ))
