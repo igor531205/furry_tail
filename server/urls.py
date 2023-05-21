@@ -27,7 +27,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('users/', include('users.urls', namespace='users')),
     path('catalogue/', include('catalogue.urls', namespace='catalogue')),
-    path('update/', include('update.urls', namespace='update')),
 ]
 
 if settings.DEBUG:
