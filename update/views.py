@@ -1,9 +1,6 @@
 from os import system
 
-from django.shortcuts import get_object_or_404
-from django.views.generic.base import TemplateView, RedirectView
-
-from common.views import TitleMixin
+from django.views.generic.base import RedirectView
 
 
 class UpdateView(RedirectView):
