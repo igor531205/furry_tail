@@ -24,9 +24,6 @@
       </div>
       <div class="buttons">
         {% if user.is_authenticated %}
-          {% if user.is_superuser or user.is_staff %}
-            <button class="signup button" onclick="window.location.href = '{% url 'admin:index' %}'">Админка</button>
-          {% endif %}
         <button class="favourite button"
           onclick="window.location.href = '{% url 'users:favorites' %}'">Избранные</button>
         <button class="signup button" onclick="window.location.href = '{% url 'users:logout' %}'">Выйти</button>
