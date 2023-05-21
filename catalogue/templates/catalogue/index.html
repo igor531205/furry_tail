@@ -9,6 +9,11 @@
 <div class="mainBody">
   <div class="input_wrapper">
     <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
+    {% if messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    {% endif %}
     <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
     <button class="search button">Искать</button>
   </div>
