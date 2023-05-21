@@ -66,6 +66,7 @@ INSTALLED_APPS = [
 
     'catalogue',
     'users',
+    'update',
 
 ]
 

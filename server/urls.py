@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('users/', include('users.urls', namespace='users')),
     path('catalogue/', include('catalogue.urls', namespace='catalogue')),
+    path('update/', include('update.urls', namespace='update')),
 ]
 
 if settings.DEBUG:
