@@ -7,41 +7,47 @@
 
 {% block body %}
 <div class="mainBody">
-    <form action="#" class="form_wrap">
 
+    <form action="{% url 'users:registration' %}" class="form_wrap" method="post">
+        {% csrf_token %}
         <div class="form_container">
-            <!-- <div class="form_data">
+            <div class="form_data">
                 <h1>Создать аккаунт</h1> 
-            </div> -->
+            </div>
             <div class="form_data">
                 Имя <br>
-                <input type="text" placeholder="Иван" class="input_text name"> <br>
+                {{ form.first_name.errors }}
+                {{ form.first_name }} <br>
             </div>
             <div class="form_data">
                 Фамилия <br>
-                <input type="text" placeholder="Иванов" class="input_text surname"> <br>
+                {{ form.last_name.errors }}
+                {{ form.last_name }} <br>
             </div>
             <div class="form_data">
                 Электронная почта <br>
-                <input type="email" placeholder="mail@mail.com" class="input_text email"> <br>
+                {{ form.email.errors }}
+                {{ form.email }} <br>
             </div>
             <div class="form_data">
                 Имя пользователя <br>
-                <input type="text" placeholder="Иван" class="input_text name"> <br>
+                {{ form.username.errors }}
+                {{ form.username }} <br>
             </div>
             <div class="form_data">
                 Пол <br>
-                <label><input type="radio" name="sex" class="sex" id="orange"> М</label> <br>
-                <label><input type="radio" name="sex" class="sex" id="orange"> Ж</label> <br>
-                <label><input type="radio" name="sex" class="sex" id="orange"> Не указано</label> <br>
+                {{ form.sex.errors }}
+                {{ form.sex }}
             </div>
             <div class="form_data">
                 Пароль <br>
-                <input type="password" placeholder="Введите пароль" class="input_text password"> <br>
+                {{ form.password1.errors }}
+                {{ form.password1 }} <br>
             </div>
             <div class="form_data">
                 Подтверждение пароля <br>
-                <input type="password" placeholder="Введите пароль" class="input_text password approve"> <br>
+                {{ form.password2.errors }}
+                {{ form.password2 }} <br>
             </div>
             <div class="form_data" style="margin-top: 5vh;">
                 <button type="submit" class="button">ОК</button>
