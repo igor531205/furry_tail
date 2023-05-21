@@ -8,6 +8,7 @@ from django.contrib.auth.forms import \
 
 from users.models import User, EmailVerification
 
+from django.utils.translation import gettext_lazy as _
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
@@ -23,7 +24,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegistrationForm(UserCreationForm):
-    SEX_CHOICES = [('1', 'М'), ('2', 'Ж'), ('', 'Не указано')]
+    SEX_CHOICES = [('1', 'М'), ('2', 'Ж'), ('0', 'Не указано')]
     first_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'input_text name', 'placeholder': 'Иван'}
     ))
@@ -38,10 +39,7 @@ class UserRegistrationForm(UserCreationForm):
     ))
     sex = forms.CharField(widget=forms.RadioSelect(
         attrs={'name': 'sex', 'class': 'sex', 'id': 'orange'}, choices=SEX_CHOICES
-    ))
-    # sex2 = forms.CharField(widget=forms.Select(
-    #     attrs={'name': 'sex', 'class': 'sex', 'id': 'orange'}, choices=SEX_CHOICES
-    # ))
+    ), initial=('0', 'Не указано'))
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'input_text password', 'placeholder': 'Введите пароль'}
     ))
@@ -49,7 +47,8 @@ class UserRegistrationForm(UserCreationForm):
         attrs={'class': 'input_text password approve', 'placeholder': 'Подтвердите пароль'}
     ))
 
-    class Meta:
+
+    class Meta(UserCreationForm.Meta):
         model = User
         fields = ('first_name', 'last_name', 'email', 'username', 'sex', 'password1', 'password2',)
 

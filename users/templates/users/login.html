@@ -7,12 +7,22 @@
 
 {% block body %}
 <div class="mainBody">
+
     <form action="{% url 'users:login' %}" class="form_wrap login" method="post">
         {% csrf_token %}
         <div class="form_container login">
             <div class="form_data login">
                 <h1>Войти</h1>
             </div>
+            {% if messages or form.non_field_errors %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% else %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+            {% endif %}
             <div class="form_data login">
                 Имя пользователя <br>
                 {{ form.username }} <br>

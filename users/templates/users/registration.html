@@ -7,6 +7,7 @@
 
 {% block body %}
 <div class="mainBody">
+
     <form action="{% url 'users:registration' %}" class="form_wrap" method="post">
         {% csrf_token %}
         <div class="form_container">
@@ -15,30 +16,37 @@
             </div>
             <div class="form_data">
                 Имя <br>
+                {{ form.first_name.errors }}
                 {{ form.first_name }} <br>
             </div>
             <div class="form_data">
                 Фамилия <br>
+                {{ form.last_name.errors }}
                 {{ form.last_name }} <br>
             </div>
             <div class="form_data">
                 Электронная почта <br>
+                {{ form.email.errors }}
                 {{ form.email }} <br>
             </div>
             <div class="form_data">
                 Имя пользователя <br>
+                {{ form.username.errors }}
                 {{ form.username }} <br>
             </div>
             <div class="form_data">
                 Пол <br>
-                {{ form.sex }} <br>
+                {{ form.sex.errors }}
+                {{ form.sex }}
             </div>
             <div class="form_data">
                 Пароль <br>
+                {{ form.password1.errors }}
                 {{ form.password1 }} <br>
             </div>
             <div class="form_data">
                 Подтверждение пароля <br>
+                {{ form.password2.errors }}
                 {{ form.password2 }} <br>
             </div>
             <div class="form_data" style="margin-top: 5vh;">
