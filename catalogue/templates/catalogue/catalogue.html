@@ -1,9 +1,49 @@
 {% extends 'catalogue/base.html' %}
 {% load static %}
 
-{% block css %} {% endblock %}
+{% block css %}
+<link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
+{% endblock %}
 
-{% block body %} {% endblock %}
+{% block body %}
+<div class="mainBody catalogue">
+    <div class="filter">
+        Здесь будут фильтры
+    </div>
+    <div class="cards">
+        <div class="card">
+            <div class="allinfo">
+                <div class="photo">
+                    <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                        alt="Снежок" style="border-radius: 20px;">
+                </div>
+                <div class="info">
+                    <h3 class="name">Снежок</h3>
+                    <div class="sex">
+                        <img src="{% static 'img/FTpaw.svg' %}" alt=""> М
+                    </div>
+                    <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">5 лет</div>
+                    <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">Игривый</div>
+                </div>
+            </div>
+            <div class="buttons pets">
+                <button class="button adopt">Приютить</button>
+                <button class="button to_favorites">В избранное</button>
+            </div>
+        </div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+
+        <div class="pages">
+            Здесь будет счетчик страниц 1..5
+        </div>
+    </div>
+    <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
+</div>
+{% endblock %}
 
 {% block content %} {% endblock %}
 

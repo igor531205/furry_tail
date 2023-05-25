@@ -37,17 +37,17 @@
 
     {% block body %} {% endblock %}
 
+    <footer class="footer">
+      <div class="right">
+        <div class="logo dark"><a href="{% url 'index' %}"></a></div>
+      </div>
+      <div class="up"><a href="#up">^</a></div>
+      {% block footer %} {% endblock %}
+    </footer>
   </div>
 </body>
 
 {% block content %} {% endblock %}
 
-<footer class="footer">
-  <div class="right">
-    <div class="logo dark"><a href="{% url 'index' %}"></a></div>
-  </div>
-  <div class="up"><a href="#up">^</a></div>
-  {% block footer %} {% endblock %}
-</footer>
 
 </html>
