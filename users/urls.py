@@ -12,4 +12,5 @@ urlpatterns = [
     path('verify/<str:username>/<uuid:code>/', EmailVerificationView.as_view(), name='email_verification'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('favorites/', login_required(UserFavoritesView.as_view()), name='favorites'),
+    path('page/<int:page>/', login_required(UserFavoritesView.as_view()), name='paginator'),
 ]

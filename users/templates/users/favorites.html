@@ -1,5 +1,5 @@
 {% extends 'catalogue/base.html' %}
-{% load static %}
+{% load static humanize %}
 
 {% block css %}
 <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
@@ -7,44 +7,65 @@
 
 {% block body %}
 <div class="mainBody catalogue">
-    <div class="filter">
-        Здесь будут фильтры
-    </div>
-    <div class="cards">
-        <div class="card">
-            <div class="allinfo">
-                <div class="photo">
-                    <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
-                        alt="Снежок" style="border-radius: 20px;">
-                </div>
-                <div class="info">
-                    <h3 class="name">Снежок</h3>
-                    <div class="sex">
-                        <img src="{% static 'img/FTpaw.svg' %}" alt=""> М
-                    </div>
-                    <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">5 лет</div>
-                    <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">Игривый</div>
-                </div>
-            </div>
-            <div class="buttons pets">
-                <button class="button adopt">Приютить</button>
-                <button class="button to_favorites">Удалить</button>
-            </div>
-        </div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+    {% if favorites %}
+        <div class="cards">
+            {% for favorite in object_list %}
+                <div class="card">
+                <div class="allinfo">
+                    <div class="photo">
+                        {% if favorite.animal.image %}
+                            <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                        {% else %}
+                            <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                            alt="Снежок" style="border-radius: 20px;">
+                        {% endif %}
 
-        <div class="pages">
-            Здесь будет счетчик страниц 1..5
+                    </div>
+                    <div class="info">
+                        <h3 class="name">{{ favorite.animal.name }}</h3>
+                        <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.sex }}</div>
+                        <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.age }}</div>
+                        <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.character }}</div>
+                    </div>
+                </div>
+                <div class="buttons pets">
+                    <button class="button adopt">Приютить</button>
+                    <button class="button to_favorites"
+                            onclick="window.location.href = '{% url 'catalogue:favorites_remove' favorite.animal.id %}'">
+                        Удалить
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if is_paginated %}
+            <div class="pages">
+                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if page_obj.has_previous %} {% url 'users:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                       tabindex="-1" aria-disabled="true">
+                        Предыдущая
+                    </a>
+                </li>
+                {% for page in paginator.page_range %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'users:paginator' page %}">
+                        {{ page }}
+                    </a>
+                </li>
+                {% endfor %}
+                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if page_obj.has_next %} {% url 'users:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                        Следующая
+                    </a>
+                </li>
+            </div>
+            {% endif %}
         </div>
-    </div>
-    <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
+        <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
+    {% else %}
+        Избранное пусто
+    {% endif %}
 </div>
 {% endblock %}
-
-{% block content %} {% endblock %}
-
-{% block footer %} {% endblock %}

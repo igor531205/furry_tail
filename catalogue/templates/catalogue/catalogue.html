@@ -1,5 +1,5 @@
 {% extends 'catalogue/base.html' %}
-{% load static %}
+{% load static humanize%}
 
 {% block css %}
 <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
@@ -8,38 +8,67 @@
 {% block body %}
 <div class="mainBody catalogue">
     <div class="filter">
-        Здесь будут фильтры
+        {% for category in categories %}
+            <a href="{% url 'catalogue:category' category.id %}" class="">
+                {{ category.name }}
+            </a>
+            <br>
+        {% endfor %}
     </div>
     <div class="cards">
-        <div class="card">
+        {% for animal in object_list %}
+            <div class="card">
             <div class="allinfo">
                 <div class="photo">
-                    <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                    {% if object.image %}
+                        <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                    {% else %}
+                        <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
                         alt="Снежок" style="border-radius: 20px;">
+                    {% endif %}
+
                 </div>
                 <div class="info">
-                    <h3 class="name">Снежок</h3>
-                    <div class="sex">
-                        <img src="{% static 'img/FTpaw.svg' %}" alt=""> М
-                    </div>
-                    <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">5 лет</div>
-                    <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">Игривый</div>
+                    <h3 class="name">{{ animal.name }}</h3>
+                    <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.sex }}</div>
+                    <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.age }}</div>
+                    <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.character }}</div>
                 </div>
             </div>
             <div class="buttons pets">
                 <button class="button adopt">Приютить</button>
-                <button class="button to_favorites">В избранное</button>
+                <button class="button to_favorites"
+                        onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'">
+                    В избранное
+                </button>
             </div>
         </div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+        {% endfor %}
 
-        <div class="pages">
-            Здесь будет счетчик страниц 1..5
-        </div>
+        {% if is_paginated %}
+            <div class="pages">
+                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                       tabindex="-1" aria-disabled="true">
+                        Предыдущая
+                    </a>
+                </li>
+                {% for page in paginator.page_range %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalogue:paginator' page %}">
+                        {{ page }}
+                    </a>
+                </li>
+                {% endfor %}
+                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                        Следующая
+                    </a>
+                </li>
+            </div>
+        {% endif %}
     </div>
     <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
 </div>

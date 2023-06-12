@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.urls import reverse, reverse_lazy
@@ -7,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 
+from catalogue.models import AnimalCategory, Favorites
 from users.forms import UserLoginForm, UserRegistrationForm
 from users.models import User, EmailVerification
 from common.views import TitleMixin
@@ -43,6 +45,8 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return HttpResponseRedirect(reverse('index'))
 
 
-class UserFavoritesView(TitleMixin, TemplateView):
+class UserFavoritesView(TitleMixin, ListView):
+    model = Favorites
     template_name = 'users/favorites.html'
     title = 'Избранное'
+    paginate_by = 6

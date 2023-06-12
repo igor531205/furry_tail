@@ -10,6 +10,7 @@ from users.models import User, EmailVerification
 
 from django.utils.translation import gettext_lazy as _
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'input_text name', 'placeholder': 'Иван'}
