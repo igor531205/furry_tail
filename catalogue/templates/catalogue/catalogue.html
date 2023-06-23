@@ -9,21 +9,21 @@
 <div class="mainBody catalogue">
     <div class="filter">
         {% for category in categories %}
-            <a href="{% url 'catalogue:category' category.id %}" class="">
-                {{ category.name }}
-            </a>
-            <br>
+        <a href="{% url 'catalogue:category' category.id %}" class="">
+            {{ category.name }}
+        </a>
+        <br>
         {% endfor %}
     </div>
     <div class="cards">
         {% for animal in object_list %}
-            <div class="card">
+        <div class="card">
             <div class="allinfo">
                 <div class="photo">
                     {% if object.image %}
-                        <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                    <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
                     {% else %}
-                        <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                    <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
                         alt="Снежок" style="border-radius: 20px;">
                     {% endif %}
 
@@ -38,7 +38,7 @@
             <div class="buttons pets">
                 <button class="button adopt">Приютить</button>
                 <button class="button to_favorites"
-                        onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'">
+                    onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'">
                     В избранное
                 </button>
             </div>
@@ -46,28 +46,28 @@
         {% endfor %}
 
         {% if is_paginated %}
-            <div class="pages">
-                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                    <a class="page-link"
-                       href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
-                       tabindex="-1" aria-disabled="true">
-                        Предыдущая
-                    </a>
-                </li>
-                {% for page in paginator.page_range %}
-                <li class="page-item">
-                    <a class="page-link" href="{% url 'catalogue:paginator' page %}">
-                        {{ page }}
-                    </a>
-                </li>
-                {% endfor %}
-                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                    <a class="page-link"
-                       href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                        Следующая
-                    </a>
-                </li>
-            </div>
+        <div class="pages">
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link"
+                    href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                    tabindex="-1" aria-disabled="true">
+                    Предыдущая
+                </a>
+            </li>
+            {% for page in paginator.page_range %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'catalogue:paginator' page %}">
+                    {{ page }}
+                </a>
+            </li>
+            {% endfor %}
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link"
+                    href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                    Следующая
+                </a>
+            </li>
+        </div>
         {% endif %}
     </div>
     <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
