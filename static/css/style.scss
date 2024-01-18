@@ -296,8 +296,10 @@ img {
 }
 
 .cards {
+    width: 100%;
+    margin-right: 3vw;
     height: 100%;
-    width: 80%;
+    // width: 80%;
     // background-color: blue;
     display: flex;
     // position: relative;
@@ -309,7 +311,7 @@ img {
 
 .card {
     // flex-grow: 1; //all cards are similar in size
-
+width: unset;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -318,7 +320,7 @@ img {
     padding: 0;
     font-family: "Nunito", sans-serif;
     background-color: #fff;
-    width: 100px;
+    // width: 100px;
     // flex: 1 0 30%;
     margin: 5px;
     overflow: scroll;
@@ -380,6 +382,12 @@ img {
     margin-top: 5%;
     margin-right: 5%;
     margin-bottom: 5%;
+}
+
+.cards-pages-box{
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
 }
 
 

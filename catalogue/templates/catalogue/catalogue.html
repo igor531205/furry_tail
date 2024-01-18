@@ -15,6 +15,7 @@
         <br>
         {% endfor %}
     </div>
+    <div class="cards-pages-box"> 
     <div class="cards">
         {% for animal in object_list %}
         <div class="card">
@@ -45,7 +46,9 @@
         </div>
         {% endfor %}
 
-        {% if is_paginated %}
+        
+    </div>
+    {% if is_paginated %}
         <div class="pages">
             <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
                 <a class="page-link"
