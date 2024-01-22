@@ -21,7 +21,7 @@
                     <div class="allinfo">
                         <div class="photo">
                             {% if favorite.animal.image %}
-                                <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                                <img src="{{ favorite.animal.image.url }}" alt="Снежок" style="border-radius: 20px;">
                             {% else %}
                                 <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
                                 alt="Снежок" style="border-radius: 20px;">
