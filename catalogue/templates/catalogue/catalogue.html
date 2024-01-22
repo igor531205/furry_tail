@@ -57,7 +57,7 @@
             <div class="details" style="display: none;">
                 <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
                 <div class="detailed-info">
-                    <p class="fakeText">Loading...</p>
+                    <p class="fakeText">{{ animal.description }}</p>
                     <div class="buttons pets">
                         <button class="button adopt">Приютить</button>
                     </div>
@@ -102,35 +102,26 @@
             card.addEventListener('click', function() {
                 let detailsDiv = this.querySelector('.details');
                 let largePhoto = detailsDiv.querySelector('.largePhoto');
-                let fakeTextParagraph = detailsDiv.querySelector('.fakeText');
+                let descriptionParagraph = detailsDiv.querySelector('.fakeText');
                 
-                // Copy the src from the small image to the large image
+                // Копируем src из маленького изображения в большое
                 let smallPhotoSrc = this.querySelector('.photo img').src;
                 largePhoto.src = smallPhotoSrc;
 
-                // Toggle the display of the details div
+                // Переключаем отображение блока с деталями
                 detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'flex' : 'none';
 
-                // Fetch fake text from an API - using Bacon Ipsum as an example
-                fetch('https://baconipsum.com/api/?type=meat-and-filler')
-                    .then(response => response.json())
-                    .then(text => {
-                        fakeTextParagraph.innerHTML = text[0];
-                    })
-                    .catch(error => {
-                        fakeTextParagraph.innerHTML = 'Error loading text';
-                        console.error('Error:', error);
-                    });
+                // Убираем загрузку текста из API, используем описание животного
+                // descriptionParagraph.innerHTML уже содержит {{ animal.description }}
 
                 detailsDiv.addEventListener('click', function(event) {
                     this.style.display = 'none';
-                    event.stopPropagation(); // Prevent the event from bubbling up to the card
+                    event.stopPropagation(); // Предотвращаем всплытие события к карточке
                 });
-        
             });
         });
 
-        // Translation dictionary
+        // Словарь перевода
         const translations = {
             'cat': 'Коты',
             'dog': 'Собаки',
@@ -138,7 +129,7 @@
             'other': 'Другие животные'
         };
 
-        // Find all category name elements and translate them
+        // Переводим названия категорий
         document.querySelectorAll('.category-name').forEach(function(element) {
             let categoryName = element.getAttribute('data-category');
             let translatedName = translations[categoryName.toLowerCase()];
@@ -148,23 +139,20 @@
             }
         });
 
-        //For tablets and mobiles - show filter
+        // Для планшетов и мобильных устройств - показываем фильтр
         let burger = document.getElementById('openFilter');
-        console.log(burger);
         let filter = document.getElementById('filter');
-        console.log(filter);
         burger.addEventListener('touchend', function(){
             burger.style.display = 'none';
             filter.style.display = 'flex';
-            console.log('there was a click');
         });
         filter.addEventListener('click', function(){
             burger.style.display = 'block';
             filter.style.display = 'none';
         });
     });
-
 </script>
+
 {% endblock %}
 
 {% block content %} {% endblock %}
