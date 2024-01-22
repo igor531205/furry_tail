@@ -8,11 +8,11 @@
 {% block body %}
 <div class="mainBody">
 
-    <form action="{% url 'users:registration' %}" class="form_wrap" method="post">
+    <form action="{% url 'users:registration' %}" class="form_wrap register" method="post">
         {% csrf_token %}
         <div class="form_container">
             <div class="form_data">
-                <h1>Создать аккаунт</h1> 
+                <h1>Создать аккаунт</h1>
             </div>
             <div class="form_data">
                 Имя <br>

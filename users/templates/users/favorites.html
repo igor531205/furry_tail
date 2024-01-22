@@ -7,65 +7,75 @@
 
 {% block body %}
 <div class="mainBody catalogue">
+    <div class="filter">
+        <h2>Адрес приюта:</h2>
+        <p>Lorem 123</p>
+        <h2>Телефон:</h2>
+        <p>123456789</p>
+    </div>
     {% if favorites %}
-        <div class="cards">
-            {% for favorite in object_list %}
-                <div class="card">
-                <div class="allinfo">
-                    <div class="photo">
-                        {% if favorite.animal.image %}
-                            <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
-                        {% else %}
-                            <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
-                            alt="Снежок" style="border-radius: 20px;">
-                        {% endif %}
+        <div class="cards-pages-box">
+            <div class="cards">
+                {% for favorite in object_list %}
+                    <div class="card">
+                    <div class="allinfo">
+                        <div class="photo">
+                            {% if favorite.animal.image %}
+                                <img src="{{ object.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                            {% else %}
+                                <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                                alt="Снежок" style="border-radius: 20px;">
+                            {% endif %}
 
+                        </div>
+                        <div class="info">
+                            <h3 class="name">{{ favorite.animal.name }}</h3>
+                            <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.sex }}</div>
+                            <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.age }}</div>
+                            <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.character }}</div>
+                        </div>
                     </div>
-                    <div class="info">
-                        <h3 class="name">{{ favorite.animal.name }}</h3>
-                        <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.sex }}</div>
-                        <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.age }}</div>
-                        <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.character }}</div>
+                    <div class="buttons pets">
+                        <button class="button adopt">Приютить</button>
+                        <button class="button to_favorites"
+                                onclick="window.location.href = '{% url 'catalogue:favorites_remove' favorite.animal.id %}'">
+                            Удалить
+                        </button>
                     </div>
                 </div>
-                <div class="buttons pets">
-                    <button class="button adopt">Приютить</button>
-                    <button class="button to_favorites"
-                            onclick="window.location.href = '{% url 'catalogue:favorites_remove' favorite.animal.id %}'">
-                        Удалить
-                    </button>
-                </div>
-            </div>
-            {% endfor %}
-
-            {% if is_paginated %}
-            <div class="pages">
-                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                    <a class="page-link"
-                       href="{% if page_obj.has_previous %} {% url 'users:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
-                       tabindex="-1" aria-disabled="true">
-                        Предыдущая
-                    </a>
-                </li>
-                {% for page in paginator.page_range %}
-                <li class="page-item">
-                    <a class="page-link" href="{% url 'users:paginator' page %}">
-                        {{ page }}
-                    </a>
-                </li>
                 {% endfor %}
-                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                    <a class="page-link"
-                       href="{% if page_obj.has_next %} {% url 'users:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                        Следующая
-                    </a>
-                </li>
+
+                {% if is_paginated %}
+                <div class="pages">
+                    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                        <a class="page-link"
+                        href="{% if page_obj.has_previous %} {% url 'users:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                        tabindex="-1" aria-disabled="true">
+                            Предыдущая
+                        </a>
+                    </li>
+                    {% for page in paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'users:paginator' page %}">
+                            {{ page }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                        <a class="page-link"
+                        href="{% if page_obj.has_next %} {% url 'users:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                            Следующая
+                        </a>
+                    </li>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
         <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
     {% else %}
-        Избранное пусто
+        <p class="fav-empty">Избранное пусто <br>
+        Найти друга вы можете <a class="go-to-favs" onclick="window.location.href = '{% url 'catalogue:index' %}'">здесь</a>
+        </p>
     {% endif %}
 </div>
 {% endblock %}

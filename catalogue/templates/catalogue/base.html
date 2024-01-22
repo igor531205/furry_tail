@@ -19,7 +19,7 @@
   <div class="wrapper">
     <div class="header" id="up">
       <div class="right">
-        <div class="logo" onclick="window.location.href = '{% url 'index' %}'"></div>
+        <div class="logo logo-mobile-display-none" onclick="window.location.href = '{% url 'index' %}'"></div>
         <button class="pets button" onclick="window.location.href = '{% url 'catalogue:index' %}'">Ищут дом</button>
       </div>
       <div class="buttons">
@@ -28,11 +28,12 @@
             <button class="signup button" onclick="window.location.href = '{% url 'admin:index' %}'">Admin</button>
           {% endif %}
         <button class="favourite button"
-          onclick="window.location.href = '{% url 'users:favorites' %}'">Избранные</button>
-        <button class="signup button" onclick="window.location.href = '{% url 'users:logout' %}'">Выйти</button>
+          onclick="window.location.href = '{% url 'users:favorites' %}'">Избранные
+        </button>
+        <button class="signup button auth" onclick="window.location.href = '{% url 'users:logout' %}'">Выйти</button>
         {% else %}
-        <button class="signin button" onclick="window.location.href = '{% url 'users:login' %}'">Войти</button>
-        <button class="signup button"
+        <button class="signin button auth" onclick="window.location.href = '{% url 'users:login' %}'">Войти</button>
+        <button class="signup button auth"
           onclick="window.location.href = '{% url 'users:registration' %}'">Регистрация</button>
         {% endif %}
       </div>
@@ -48,7 +49,19 @@
       {% block footer %} {% endblock %}
     </footer>
   </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      // Event listener for adopt buttons
+      document.querySelectorAll('.button.adopt').forEach(function(button) {
+          button.addEventListener('click', function() {
+              alert('Чтобы приютить животное, свяжитесь с нами! Тел.: 123456789');
+          });
+      });
+    });
+  </script>
 </body>
+
 
 {% block content %} {% endblock %}
 

@@ -7,9 +7,17 @@
 
 {% block body %}
 <div class="mainBody catalogue">
-    <div class="filter">
+    <svg id="openFilter" class="burger-tablet-mobile" width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top Line -->
+        <rect x="0" y="0" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
+        <!-- Middle Line -->
+        <rect x="0" y="13" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
+        <!-- Bottom Line -->
+        <rect x="0" y="26" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
+    </svg>
+    <div class="filter" id="filter">
         {% for category in categories %}
-        <a href="{% url 'catalogue:category' category.id %}" class="">
+        <a href="{% url 'catalogue:category' category.id %}" class="category-name" data-category="{{ category.name }}">
             {{ category.name }}
         </a>
         <br>
@@ -38,10 +46,22 @@
             </div>
             <div class="buttons pets">
                 <button class="button adopt">Приютить</button>
-                <button class="button to_favorites"
-                    onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'">
+                <button
+                    class="button to_favorites"
+                    onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'"
+                    >
                     В избранное
                 </button>
+            </div>
+            <!-- div for details and larger image -->
+            <div class="details" style="display: none;">
+                <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
+                <div class="detailed-info">
+                    <p class="fakeText">Loading...</p>
+                    <div class="buttons pets">
+                        <button class="button adopt">Приютить</button>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -75,6 +95,76 @@
     </div>
     <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                let detailsDiv = this.querySelector('.details');
+                let largePhoto = detailsDiv.querySelector('.largePhoto');
+                let fakeTextParagraph = detailsDiv.querySelector('.fakeText');
+                
+                // Copy the src from the small image to the large image
+                let smallPhotoSrc = this.querySelector('.photo img').src;
+                largePhoto.src = smallPhotoSrc;
+
+                // Toggle the display of the details div
+                detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'flex' : 'none';
+
+                // Fetch fake text from an API - using Bacon Ipsum as an example
+                fetch('https://baconipsum.com/api/?type=meat-and-filler')
+                    .then(response => response.json())
+                    .then(text => {
+                        fakeTextParagraph.innerHTML = text[0];
+                    })
+                    .catch(error => {
+                        fakeTextParagraph.innerHTML = 'Error loading text';
+                        console.error('Error:', error);
+                    });
+
+                detailsDiv.addEventListener('click', function(event) {
+                    this.style.display = 'none';
+                    event.stopPropagation(); // Prevent the event from bubbling up to the card
+                });
+        
+            });
+        });
+
+        // Translation dictionary
+        const translations = {
+            'cat': 'Коты',
+            'dog': 'Собаки',
+            'bird': 'Птицы',
+            'other': 'Другие животные'
+        };
+
+        // Find all category name elements and translate them
+        document.querySelectorAll('.category-name').forEach(function(element) {
+            let categoryName = element.getAttribute('data-category');
+            let translatedName = translations[categoryName.toLowerCase()];
+
+            if (translatedName) {
+                element.textContent = translatedName;
+            }
+        });
+
+        //For tablets and mobiles - show filter
+        let burger = document.getElementById('openFilter');
+        console.log(burger);
+        let filter = document.getElementById('filter');
+        console.log(filter);
+        burger.addEventListener('touchend', function(){
+            burger.style.display = 'none';
+            filter.style.display = 'flex';
+            console.log('there was a click');
+        });
+        filter.addEventListener('click', function(){
+            burger.style.display = 'block';
+            filter.style.display = 'none';
+        });
+    });
+
+</script>
 {% endblock %}
 
 {% block content %} {% endblock %}

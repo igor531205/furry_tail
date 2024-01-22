@@ -7,65 +7,148 @@
 
 {% block body %}
 <div class="mainBody">
-  <div class="input_wrapper">
+  <!-- <div class="input_wrapper">
     <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
     <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
     <button class="search button">Искать</button>
+  </div> -->
+
+  <div class="mainBody__info">
+    <p class="intro">
+      Добро пожаловать на сайт приюта для животных!
+      Наша организация предлагает уникальную возможность помочь бездомным животным и найти новый дом для тех, 
+      кто в нем нуждается.
+      Здесь вы найдете информацию о наших подопечных, сможете найти пушистого друга, а также помочь нам в нашей миссии спасения и заботы о животных. 
+    </p>
+  
+    <div id="quiz" class="form_wrap quiz">
+      <h2 id="qiuz__heading">Пройдите викторину и узнайте, какое домашнее животное вам подходит &#8681;</h2>
+      <div id="question" class="question"></div>
+      <button id="nextButton" class="button button__quiz">Начать викторину</button>
+    </div>
+    <div id="result"></div>
   </div>
+
+
   <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
 </div>
+<script>
+  const questions = [
+    { text: "Выберите предпочтительное место для жизни:", options: ["Квартира", "Дом с садом", "Ферма", "Любое место"] },
+    { text: "Что вы предпочитаете есть?", options: ["Мясо", "Овощи", "Все подряд", "Лакомства"] },
+    { text: "Выберите любимое занятие:", options: ["Играть", "Спать", "Наблюдать", "Обниматься"] }
+  ];
+
+  let currentQuestionIndex = -1;
+  let answers = [];
+
+  function showNextQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+          const question = questions[currentQuestionIndex];
+          document.getElementById('qiuz__heading').innerHTML = ``;
+
+          const deleteButton = document.getElementById('nextButton');
+          deleteButton.style.visibility = 'hidden';
+          document.getElementById('question').innerHTML = `
+              <h3>${question.text}</h3>
+              <ul>
+                  ${question.options.map((option, index) => `<li onclick="selectOption(${index})">${option}</li>`).join('')}
+              </ul>
+          `;
+      } else {
+          showResult();
+      }
+  }
+
+  function selectOption(optionIndex) {
+      answers[currentQuestionIndex] = optionIndex;
+      showNextQuestion();
+  }
+
+  function showResult() {
+      // Scoring for each animal
+      let scores = {
+          Cat: 0,
+          Dog: 0,
+          Hamster: 0,
+      };
+
+      // Question 1: Environment Preference
+      switch (answers[0]) {
+          case 0: // Apartment
+              scores.Cat += 2;
+              scores.Hamster += 1;
+              break;
+          case 1: // House with a garden
+              scores.Dog += 2;
+              scores.Cat += 1;
+              break;
+          case 2: // Farm
+              scores.Dog += 2;
+              scores.Hamster += 1;
+              break;
+          case 3: // Anywhere
+              scores.Cat += 1;
+              scores.Dog += 1;
+              scores.Hamster += 1;
+              break;
+      }
+
+      // Question 2: Food Preference
+      switch (answers[1]) {
+          case 0: // Meat
+              scores.Cat += 2;
+              scores.Dog += 1;
+              break;
+          case 1: // Vegetables
+              scores.Hamster += 2;
+              break;
+          case 2: // Anything
+              scores.Dog += 2;
+              scores.Cat += 1;
+              break;
+          case 3: // Treats
+              scores.Hamster += 2;
+              break;
+      }
+
+      // Question 3: Leisure Activity
+      switch (answers[2]) {
+          case 0: // Playing
+              scores.Dog += 2;
+              scores.Cat += 1;
+              break;
+          case 1: // Sleeping
+              scores.Cat += 2;
+              break;
+          case 2: // Watching
+              scores.Hamster += 1;
+              break;
+          case 3: // Cuddling
+              scores.Dog += 2;
+              scores.Cat += 1;
+              break;
+      }
+
+      // Determine the animal with the highest score
+      let maxScore = Math.max(...Object.values(scores));
+      let mostSuitableAnimal = Object.keys(scores).find(animal => scores[animal] === maxScore);
+
+      // Translate the animal name to Russian
+      let animalTranslations = {
+          Cat: "Кошка",
+          Dog: "Собака",
+          Hamster: "Хомяк"
+      };
+
+      let resultAnimal = animalTranslations[mostSuitableAnimal];
+
+      // Display the result
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result').innerHTML = `<h2>Вам подходит: ${resultAnimal}! <br> Найти друга вы можете <a class="go-to-favs" onclick="window.location.href = '{% url 'catalogue:index' %}'">здесь</a></h2>`;
+  }
+
+  document.getElementById('nextButton').addEventListener('click', showNextQuestion);
+</script>
 {% endblock %}
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Nunito&display=swap');
-  </style>
-  <link href="{% static 'img/TitleHomePage.png' %}" rel="shortcut icon" type="image/png">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
-  <div class="wrapper">
-    <div class="header" id="up">
-      <div class="right">
-        <div class="logo"><a href="{% url 'index' %}"></a></div>
-        <button class="pets button"><a href="{% url 'catalogue:index' %}">Ищут дом</a></button>
-      </div>
-      <div class="buttons">
-        {% if user.is_authenticated %}
-          <button class="favourite button"> <a href="{% url 'users:favorites' %}">Избранные</a></button>
-          <button class="signup button"><a href="{% url 'users:logout' %}">Выйти</a></button>
-        {% else %}
-          <button class="signin button"><a href="{% url 'users:login' %}">Войти</a></button>
-          <button class="signup button"><a href="{% url 'users:registration' %}">Регистрация</a></button>
-        {% endif %}
-      </div>
-
-    </div>
-    <div class="mainBody">
-      <div class="input_wrapper">
-        <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
-        <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
-        <button class="search button">Искать</button>
-      </div>
-      <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
-    </div>
-    <div class="footer">
-      <div class="right">
-        <div class="logo dark"><a href="{% url 'index' %}"></a></div>
-      </div>
-      <div class="up"><a href="#up">^</a></div>
-    </div>
-  </div>
-</body>
-
-</html>
