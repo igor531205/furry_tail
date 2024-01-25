@@ -7,14 +7,6 @@
 
 {% block body %}
 <div class="mainBody catalogue">
-    <svg id="openFilter" class="burger-tablet-mobile" width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
-        <!-- Top Line -->
-        <rect x="0" y="0" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
-        <!-- Middle Line -->
-        <rect x="0" y="13" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
-        <!-- Bottom Line -->
-        <rect x="0" y="26" width="40" height="4" fill="white" stroke="#2E4960" stroke-width="1" rx="2" ry="2"/>
-    </svg>
     <div class="filter" id="filter">
         {% for category in categories %}
         <a href="{% url 'catalogue:category' category.id %}" class="category-name" data-category="{{ category.name }}">
@@ -74,7 +66,11 @@
                 <a class="page-link"
                     href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
                     tabindex="-1" aria-disabled="true">
-                    Предыдущая
+                    <!-- Предыдущая -->
+                    <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 30 10 L 20 25 L 30 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    
                 </a>
             </li>
             {% for page in paginator.page_range %}
@@ -87,7 +83,11 @@
             <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
                 <a class="page-link"
                     href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                    Следующая
+                    <!-- Следующая -->
+                    <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 20 10 L 30 25 L 20 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    
                 </a>
             </li>
         </div>
@@ -126,7 +126,7 @@
             'cat': 'Коты',
             'dog': 'Собаки',
             'bird': 'Птицы',
-            'other': 'Другие животные'
+            'other': 'Другие'
         };
 
         // Переводим названия категорий
@@ -140,16 +140,16 @@
         });
 
         // Для планшетов и мобильных устройств - показываем фильтр
-        let burger = document.getElementById('openFilter');
-        let filter = document.getElementById('filter');
-        burger.addEventListener('touchend', function(){
-            burger.style.display = 'none';
-            filter.style.display = 'flex';
-        });
-        filter.addEventListener('click', function(){
-            burger.style.display = 'block';
-            filter.style.display = 'none';
-        });
+        // let burger = document.getElementById('openFilter');
+        // let filter = document.getElementById('filter');
+        // burger.addEventListener('touchend', function(){
+        //     burger.style.display = 'none';
+        //     filter.style.display = 'flex';
+        // });
+        // filter.addEventListener('click', function(){
+        //     burger.style.display = 'block';
+        //     filter.style.display = 'none';
+        // });
     });
 </script>
 

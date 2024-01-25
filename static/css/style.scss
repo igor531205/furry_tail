@@ -41,16 +41,16 @@ img {
         height: 71px;
     }
 
-    background-image: url("/static/img/FTLogo.svg");
-    background-repeat: no-repeat;
-    width: 213px;
-    height: 71px;
-    left: 43px;
-    top: 18px;
+    // background-image: url("/static/img/FTLogo.svg");
+    // background-repeat: no-repeat;
+    // width: 213px;
+    // height: 71px;
+    // left: 43px;
+    // top: 18px;
     display:flex;
 
     &.dark {
-        background-image: url("/static/img/FTLogoDark.svg");
+        // background-image: url("/static/img/FTLogoDark.svg");
     }
 
     &:hover {
@@ -80,6 +80,7 @@ img {
         margin-top: 0px;
         position: unset;
         width: 90%;
+        height: 90%;
         justify-self: center;
         grid-area: 2/1/span 2/span 2;
 
@@ -135,6 +136,10 @@ img {
         justify-content: center;
         align-items: flex-end;
         gap: 5px;
+    }
+
+    &.catalogue{
+        justify-content: center;
     }
 }
 
@@ -206,6 +211,7 @@ img {
     display: flex;
     align-items: center;
     border-radius: 10px 10px 0px 0px;
+    z-index: 3;
 }
 
 .up {
@@ -365,6 +371,7 @@ img {
 }
 
 .filter {
+    text-align: center;
     height: 100%;
     width: 15%;
     background-color: transparent;
@@ -412,7 +419,9 @@ img {
     min-width: 25vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    // grid-template-rows: 1fr 1fr;
+    // grid-template-rows: 4fr 1fr;
+    grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
     max-width: 30%;
     height: 40%;
     padding: 0;
@@ -448,6 +457,12 @@ img {
     a{
         color:#2E4960;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .disabled{
+        opacity: 0.5;
     }
 }
 
@@ -485,10 +500,8 @@ img {
     grid-area: 1/1/1/span 2;
     justify-content: space-around;
     display: flex;
-    margin-left: 5%;
-    margin-top: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
+    margin: 5%;
+    height: 90%;
 }
 
 .cards-pages-box{
@@ -520,6 +533,7 @@ img {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
 
         .buttons.pets{
             height: 10vh;
@@ -595,6 +609,7 @@ img {
             align-items: start;
             margin-top: 0;
             margin-bottom: 0;
+            flex-direction: row;
         }
 
         .photo {
@@ -606,8 +621,11 @@ img {
 
         .info{
             align-items: flex-start;
-            padding-left: 5vw;
-            margin-top: -3vh;
+            margin-top: 0;
+            width: 30%;
+            height: 100%;
+            justify-content: space-evenly;
+            font-size: x-large;
         }
     }
 
@@ -639,7 +657,26 @@ img {
     }
 
     .filter{
-        display: none;
+        // display: none;
+        display: flex;
+        flex-direction: row;
+        position: sticky;
+        height: 10vh;
+        z-index: 2;
+        background-color: aliceblue;
+        opacity: 1;
+        align-self: flex-end;
+        padding: 5px;
+        align-items: center;
+        justify-content: space-evenly;
+        
+        &.small{
+            font-size: small;
+        }
+
+        a{
+            font-size: larger;
+        }
     }
 
     .pages{
@@ -648,7 +685,19 @@ img {
 
     .details{
         max-width: 95vw;
-        height: 80vh;
+        max-height: 72vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 20vh;
+        z-index: 2;
+
+        .largePhoto{
+            max-width: unset;
+            max-height: 60%;
+            border-radius: 20px;
+        }
     }
 
     .mainBody{
@@ -662,6 +711,39 @@ img {
             height: 70vh;
             top: 10vh;
         }
+
+        &.catalogue{
+            flex-direction: column;
+            max-height: 100vh;
+            justify-content: unset;
+            align-items: center;
+        }
+
+        .cards-pages-box{
+            // max-height: 80vh;
+            height: 80vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card{
+            // flex: 1 100%;
+            min-width: 90vw;
+            min-height: 70vh;
+
+            .allinfo{
+                align-items: center;
+            }
+
+            .photo{
+                justify-content: flex-start;
+                width: 50%;
+            }
+        }
+    }
+
+    .fav-empty{
+        margin-top: 23vh;
     }
 }
 
@@ -737,5 +819,25 @@ img {
     .input_text {
         width: 95%;
         left: 2.5%;
+    }
+
+    .allinfo{
+        flex-direction: column !important;
+
+        .info{
+            width: 90%;
+        }
+    }
+
+    .buttons.pets{
+        justify-content: center;
+
+        .button{
+            width: 35%;
+        }
+    }
+
+    .cards{
+        justify-content: center;
     }
 }
