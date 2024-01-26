@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="mainBody catalogue">
+<div class="mainBody mainBody_catalogue">
     <div class="filter" id="filter">
         {% for category in categories %}
         <a href="{% url 'catalogue:category' category.id %}" class="category-name" data-category="{{ category.name }}">
@@ -15,11 +15,11 @@
         <br>
         {% endfor %}
     </div>
-    <div class="cards-pages-box"> 
-    <div class="cards">
+    <div class="cards-pages-box">
+    <div class="cards-pages-box__cards">
         {% for animal in object_list %}
         <div class="card">
-            <div class="allinfo">
+            <div class="card__allinfo">
                 <div class="photo">
                     {% if animal.image %}
                     <img src="{{ animal.image.url }}" alt="Снежок" style="border-radius: 20px;">
@@ -29,17 +29,17 @@
                     {% endif %}
 
                 </div>
-                <div class="info">
+                <div class="card__allinfo__info">
                     <h3 class="name">{{ animal.name }}</h3>
                     <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.sex }}</div>
                     <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.age }}</div>
                     <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.character }}</div>
                 </div>
             </div>
-            <div class="buttons pets">
+            <div class="buttons buttons__pets">
                 <button class="button adopt">Приютить</button>
                 <button
-                    class="button to_favorites"
+                    class="button"
                     onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'"
                     >
                     В избранное
@@ -50,7 +50,7 @@
                 <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
                 <div class="detailed-info">
                     <p class="fakeText">{{ animal.description }}</p>
-                    <div class="buttons pets">
+                    <div class="buttons buttons__pets">
                         <button class="button adopt">Приютить</button>
                     </div>
                 </div>

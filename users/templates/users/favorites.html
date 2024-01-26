@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="mainBody catalogue">
+<div class="mainBody mainBody_catalogue">
     <div class="filter small">
         <h2>Адрес приюта:</h2>
         <p>Lorem 123</p>
@@ -15,10 +15,10 @@
     </div>
     {% if favorites %}
         <div class="cards-pages-box">
-            <div class="cards">
+            <div class="cards-pages-box__cards">
                 {% for favorite in object_list %}
                     <div class="card">
-                        <div class="allinfo">
+                        <div class="card__allinfo">
                             <div class="photo">
                                 {% if favorite.animal.image %}
                                     <img src="{{ favorite.animal.image.url }}" alt="Снежок" style="border-radius: 20px;">
@@ -28,30 +28,34 @@
                                 {% endif %}
 
                             </div>
-                            <div class="info">
+                            <div class="card__allinfo__info">
                                 <h3 class="name">{{ favorite.animal.name }}</h3>
                                 <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.sex }}</div>
                                 <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.age }}</div>
                                 <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ favorite.animal.character }}</div>
                             </div>
                         </div>
-                        <div class="buttons pets">
+                        <div class="buttons buttons__pets">
                             <button class="button adopt">Приютить</button>
-                            <button class="button to_favorites"
+                            <button class="button"
                                     onclick="window.location.href = '{% url 'catalogue:favorites_remove' favorite.animal.id %}'">
                                 Удалить
                             </button>
                         </div>
+
+
                         <!-- div for details and larger image -->
                         <div class="details" style="display: none;">
                             <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
                             <div class="detailed-info">
                                 <p class="fakeText">{{ favorite.animal.description }}</p>
-                                <div class="buttons pets">
+                                <div class="buttons buttons__pets">
                                     <button class="button adopt">Приютить</button>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 {% endfor %}
             </div>
