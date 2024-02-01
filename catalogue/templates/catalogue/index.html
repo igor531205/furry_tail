@@ -7,12 +7,6 @@
 
 {% block body %}
 <div class="mainBody">
-  <!-- <div class="input_wrapper">
-    <img src="{% static 'img/FTLogoPic.svg' %}" alt="" class="input_pic">
-    <input name="search" id="" placeholder="Найти любовь" class="input_text"></input>
-    <button class="search button">Искать</button>
-  </div> -->
-
   <div class="mainBody__info">
     <p class="intro">
       Добро пожаловать на сайт приюта для животных!
@@ -21,15 +15,13 @@
       Здесь вы найдете информацию о наших подопечных, сможете найти пушистого друга, а также помочь нам в нашей миссии спасения и заботы о животных. 
     </p>
   
-    <div id="quiz" class="form_wrap quiz">
+    <div id="quiz" class="form-wrap quiz">
       <h2 id="qiuz__heading" class="qiuz__heading" >Пройдите викторину и узнайте, какое домашнее животное вам подходит &#8681;</h2>
       <div id="question" class="question"></div>
       <button id="nextButton" class="button button__quiz">Начать викторину</button>
     </div>
     <div id="result"></div>
   </div>
-
-
   <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
 </div>
 <script>

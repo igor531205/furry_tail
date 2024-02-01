@@ -8,48 +8,48 @@
 {% block body %}
 <div class="mainBody">
 
-    <form action="{% url 'users:registration' %}" class="form_wrap register" method="post">
+    <form action="{% url 'users:registration' %}" class="form-wrap register" method="post">
         {% csrf_token %}
-        <div class="form_container">
-            <div class="form_data">
+        <div class="form-container">
+            <div class="form-data">
                 <h1>Создать аккаунт</h1>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Имя <br>
                 {{ form.first_name.errors }}
                 {{ form.first_name }} <br>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Фамилия <br>
                 {{ form.last_name.errors }}
                 {{ form.last_name }} <br>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Электронная почта <br>
                 {{ form.email.errors }}
                 {{ form.email }} <br>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Имя пользователя <br>
                 {{ form.username.errors }}
                 {{ form.username }} <br>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Пол <br>
                 {{ form.sex.errors }}
                 {{ form.sex }}
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Пароль <br>
                 {{ form.password1.errors }}
                 {{ form.password1 }} <br>
             </div>
-            <div class="form_data">
+            <div class="form-data">
                 Подтверждение пароля <br>
                 {{ form.password2.errors }}
                 {{ form.password2 }} <br>
             </div>
-            <div class="form_data" style="margin-top: 5vh;">
+            <div class="form-data" style="margin-top: 5vh;">
                 <button type="submit" class="button">ОК</button>
                 <button type="reset" class="button">Очистить</button><br>
             </div>

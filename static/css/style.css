@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -15,13 +21,6 @@ svg {
 
 .top {
   flex-grow: 1;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Comfortaa", cursive;
-  font-family: "Nunito", sans-serif;
 }
 
 .header {
@@ -82,7 +81,8 @@ svg {
 }
 
 .button {
-  font-family: Nunito;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   width: 128px;
   font-style: normal;
   font-weight: 700;
@@ -225,7 +225,7 @@ svg {
   font-weight: bold;
 }
 
-.form_wrap {
+.form-wrap {
   position: absolute;
   width: 30%;
   height: 90%;
@@ -237,26 +237,23 @@ svg {
   display: flex;
   overflow: scroll;
 }
-.form_wrap h1 {
-  font-size: 50;
-}
-.form_wrap.login {
+.form-wrap.login {
   height: 50%;
   left: 15vw;
   top: 15vh;
 }
-.form_wrap.quiz {
+.form-wrap.quiz {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 25px;
+  padding: 15px;
   box-sizing: border-box;
   position: unset;
   height: 40%;
   width: 75%;
   gap: 5vh;
 }
-.form_wrap.quiz h2 {
+.form-wrap.quiz h2 {
   max-height: 90%;
   font-size: 4vh;
   overflow: scroll;
@@ -303,7 +300,7 @@ svg {
 .question ul li:hover {
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
 }
 
 .go-to-favs {
@@ -314,36 +311,39 @@ svg {
   color: #FF9F00;
 }
 
-.form_container {
+.form-container {
   width: 70%;
   height: 90%;
   left: 7%;
   top: 5%;
   position: absolute;
 }
-.form_container .input_text {
+.form-container button {
+  height: 5vh;
+}
+.form-container .input_text {
   height: 7%;
   left: 0vw;
 }
-.form_container.login {
+.form-container.login {
   height: 100%;
 }
 
-.form_data {
+.form-data {
   margin-bottom: 3vh;
 }
-.form_data button {
+.form-data button {
   margin-bottom: 2vh;
 }
-.form_data .sex {
+.form-data .sex {
   margin-top: 1vh;
   gap: 3vw;
 }
 
-.form_data.login {
+.form-data.login {
   margin-top: 1vh;
 }
-.form_data.login .input_text {
+.form-data.login .input_text {
   margin-top: 1vh;
   height: 10%;
 }
@@ -358,9 +358,8 @@ svg {
   width: 15%;
   background-color: transparent;
   border: 1px solid grey;
-  opacity: 0.5;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -373,13 +372,13 @@ svg {
   text-decoration: none;
   width: 80%;
   text-align: center;
-  color: #16242f;
+  color: #2E4960;
   font-size: 25px;
 }
 .filter a:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px 10px 10px 10px;
-  color: #c37800;
+  border-radius: 10px;
+  color: #FF9F00;
 }
 
 .pages {
@@ -462,8 +461,7 @@ svg {
   max-width: 30%;
   height: 40%;
   padding: 0;
-  font-family: "Nunito", sans-serif;
-  background-color: #fff;
+  background-color: white;
   margin: 5px;
   overflow: scroll;
   border: 1px solid rgb(164, 164, 164);
@@ -544,11 +542,31 @@ svg {
     min-width: 35vw;
   }
 }
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 75vh;
+}
+.center .fakeImg {
+  width: 60%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center .fakeImg img {
+  max-height: 100%;
+  border-radius: 20px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 @media (max-width: 768px) {
-  .wrapper, .header, .mainBody, .footer, .form_wrap, .details, .cards-pages-box {
+  .wrapper, .header, .mainBody, .footer, .form-wrap, .details, .cards-pages-box {
     width: 100vw;
   }
-  .input_wrapper, .form_container, .question, .intro, .filter {
+  .input_wrapper, .form-container, .question, .intro, .filter {
     width: 70%;
     left: 15%;
   }
@@ -649,9 +667,6 @@ svg {
   .quiz .question {
     margin-top: -10vh;
   }
-  .burger-tablet-mobile {
-    display: block;
-  }
   .filter {
     display: flex;
     flex-direction: row;
@@ -674,7 +689,7 @@ svg {
   .pages {
     width: 55vw;
   }
-  .mainBody .form_wrap.login {
+  .mainBody .form-wrap.login {
     width: 75vw;
     height: 45vh;
   }
@@ -689,15 +704,12 @@ svg {
     justify-content: unset;
     align-items: center;
   }
-  .fav-empty {
-    margin-top: 23vh;
-  }
 }
 @media (max-width: 480px) {
-  .wrapper, .header, .mainBody, .footer, .form_wrap, .details, .cards-pages-box {
+  .wrapper, .header, .mainBody, .footer, .form-wrap, .details, .cards-pages-box {
     width: 100vw;
   }
-  .input_wrapper, .form_container, .question, .intro, .filter {
+  .input_wrapper, .form-container, .question, .intro, .filter {
     width: 90%;
     left: 5%;
   }
@@ -742,6 +754,9 @@ svg {
   }
   .mainBody .button__quiz {
     width: 70%;
+  }
+  .mainBody .fav-empty {
+    margin-top: 7vh;
   }
   .photo {
     width: 90%;

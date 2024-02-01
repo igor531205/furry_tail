@@ -16,81 +16,77 @@
         {% endfor %}
     </div>
     <div class="cards-pages-box">
-    <div class="cards-pages-box__cards">
-        {% for animal in object_list %}
-        <div class="card">
-            <div class="card__allinfo">
-                <div class="photo">
-                    {% if animal.image %}
-                    <img src="{{ animal.image.url }}" alt="Снежок" style="border-radius: 20px;">
-                    {% else %}
-                    <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
-                        alt="Снежок" style="border-radius: 20px;">
-                    {% endif %}
+        <div class="cards-pages-box__cards">
+            {% for animal in object_list %}
+            <div class="card">
+                <div class="card__allinfo">
+                    <div class="photo">
+                        {% if animal.image %}
+                        <img src="{{ animal.image.url }}" alt="Снежок" style="border-radius: 20px;">
+                        {% else %}
+                        <img src="{% static 'img/animals_pics/scottish-fold-cat-wearing-red-bow-celebrating-christmas.jpg' %}"
+                            alt="Снежок" style="border-radius: 20px;">
+                        {% endif %}
 
+                    </div>
+                    <div class="card__allinfo__info">
+                        <h3 class="name">{{ animal.name }}</h3>
+                        <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.sex }}</div>
+                        <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.age }}</div>
+                        <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.character }}</div>
+                    </div>
                 </div>
-                <div class="card__allinfo__info">
-                    <h3 class="name">{{ animal.name }}</h3>
-                    <div class="sex"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.sex }}</div>
-                    <div class="age"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.age }}</div>
-                    <div class="character"><img src="{% static 'img/FTpaw.svg' %}" alt="">{{ animal.character }}</div>
+                <div class="buttons buttons__pets">
+                    <button class="button adopt">Приютить</button>
+                    <button
+                        class="button"
+                        onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'"
+                        >
+                        В избранное
+                    </button>
                 </div>
-            </div>
-            <div class="buttons buttons__pets">
-                <button class="button adopt">Приютить</button>
-                <button
-                    class="button"
-                    onclick="window.location.href = '{% url 'catalogue:favorites_add' animal.id %}'"
-                    >
-                    В избранное
-                </button>
-            </div>
-            <!-- div for details and larger image -->
-            <div class="details" style="display: none;">
-                <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
-                <div class="detailed-info">
-                    <p class="fakeText">{{ animal.description }}</p>
-                    <div class="buttons buttons__pets">
-                        <button class="button adopt">Приютить</button>
+                <!-- div for details and larger image -->
+                <div class="details" style="display: none;">
+                    <img class="largePhoto" src="#" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
+                    <div class="detailed-info">
+                        <p class="fakeText">{{ animal.description }}</p>
+                        <div class="buttons buttons__pets">
+                            <button class="button adopt">Приютить</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-
-        
-    </div>
-    {% if is_paginated %}
-        <div class="pages">
-            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                <a class="page-link"
-                    href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
-                    tabindex="-1" aria-disabled="true">
-                    <!-- Предыдущая -->
-                    <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 30 10 L 20 25 L 30 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
-                    </svg>
-                    
-                </a>
-            </li>
-            {% for page in paginator.page_range %}
-            <li class="page-item">
-                <a class="page-link" href="{% url 'catalogue:paginator' page %}">
-                    {{ page }}
-                </a>
-            </li>
             {% endfor %}
-            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                <a class="page-link"
-                    href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                    <!-- Следующая -->
-                    <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 20 10 L 30 25 L 20 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
-                    </svg>
-                    
-                </a>
-            </li>
         </div>
+        {% if is_paginated %}
+            <ul class="pages">
+                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                    <a class="page-link"
+                        href="{% if page_obj.has_previous %} {% url 'catalogue:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                        tabindex="-1" aria-disabled="true">
+                        <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 30 10 L 20 25 L 30 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        
+                    </a>
+                </li>
+                {% for page in paginator.page_range %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'catalogue:paginator' page %}">
+                        {{ page }}
+                    </a>
+                </li>
+                {% endfor %}
+                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                    <a class="page-link"
+                        href="{% if page_obj.has_next %} {% url 'catalogue:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                        <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 20 10 L 30 25 L 20 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        
+                    </a>
+                </li>
+            </ul>
         {% endif %}
     </div>
     <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
@@ -110,9 +106,6 @@
 
                 // Переключаем отображение блока с деталями
                 detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'flex' : 'none';
-
-                // Убираем загрузку текста из API, используем описание животного
-                // descriptionParagraph.innerHTML уже содержит {{ animal.description }}
 
                 detailsDiv.addEventListener('click', function(event) {
                     this.style.display = 'none';
@@ -138,18 +131,6 @@
                 element.textContent = translatedName;
             }
         });
-
-        // Для планшетов и мобильных устройств - показываем фильтр
-        // let burger = document.getElementById('openFilter');
-        // let filter = document.getElementById('filter');
-        // burger.addEventListener('touchend', function(){
-        //     burger.style.display = 'none';
-        //     filter.style.display = 'flex';
-        // });
-        // filter.addEventListener('click', function(){
-        //     burger.style.display = 'block';
-        //     filter.style.display = 'none';
-        // });
     });
 </script>
 

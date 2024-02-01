@@ -46,7 +46,7 @@
 
                         <!-- div for details and larger image -->
                         <div class="details" style="display: none;">
-                            <img class="largePhoto" src="" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
+                            <img class="largePhoto" src="#" alt="Enlarged Animal" style="max-width: 100%; height: auto;">
                             <div class="detailed-info">
                                 <p class="fakeText">{{ favorite.animal.description }}</p>
                                 <div class="buttons buttons__pets">
@@ -54,18 +54,15 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 {% endfor %}
             </div>
             {% if is_paginated %}
-            <div class="pages">
+            <ul class="pages">
                 <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
                     <a class="page-link"
                     href="{% if page_obj.has_previous %} {% url 'users:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
                     tabindex="-1" aria-disabled="true">
-                        <!-- Предыдущая -->
                         <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 30 10 L 20 25 L 30 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
                         </svg>
@@ -81,20 +78,24 @@
                 <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
                     <a class="page-link"
                     href="{% if page_obj.has_next %} {% url 'users:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                        <!-- Следующая -->
                         <svg width="25" height="25" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 20 10 L 30 25 L 20 40" stroke="#2E4960" stroke-width="5" stroke-linecap="round" fill="none"/>
                         </svg>
                     </a>
                 </li>
-            </div>
+            </ul>
             {% endif %}
         </div>
         <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi pale">
     {% else %}
-        <p class="fav-empty">Избранное пусто <br>
-        Найти друга вы можете <a class="go-to-favs" onclick="window.location.href = '{% url 'catalogue:index' %}'">здесь</a>
-        </p>
+        <div class="center">
+            <p class="fav-empty">Избранное пусто <br>
+            Найти друга вы можете <a class="go-to-favs" onclick="window.location.href = '{% url 'catalogue:index' %}'">здесь</a>
+            </p>
+            <div class="fakeImg">
+                <img src="#" alt="fakeImg" id="idFakeImg">
+            </div>
+        </div>
     {% endif %}
 </div>
 <script>
@@ -122,6 +123,30 @@
                 });
             });
         });
+
+        //Получение случайного изображения собаки из Dog API:
+        let fakeImg = document.getElementById('idFakeImg');
+        fetch("https://dog.ceo/api/breeds/image/random")
+            .then((response) => {
+            // Проверяем статус ответа
+                if (response.status !== 200) {
+                    console.error("Ошибка запроса: " + response.status);
+                    return;
+                }
+                
+                // Преобразуем ответ в JSON
+                return response.json();
+            })
+            .then((data) => {
+                // Обработка данных
+                const imageUrl = data.message;
+                console.log("Случайное изображение собаки: " + imageUrl);
+                fakeImg.src = data.message;
+            })
+            .catch((error) => {
+                console.error("Произошла ошибка: " + error);
+            });
+
     });
 </script>
 {% endblock %}

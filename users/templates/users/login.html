@@ -8,10 +8,10 @@
 {% block body %}
 <div class="mainBody">
 
-    <form action="{% url 'users:login' %}" class="form_wrap login" method="post">
+    <form action="{% url 'users:login' %}" class="form-wrap login" method="post">
         {% csrf_token %}
-        <div class="form_container login">
-            <div class="form_data login">
+        <div class="form-container login">
+            <div class="form-data login">
                 <h1>Войти</h1>
             </div>
             {% if messages or form.non_field_errors %}
@@ -23,15 +23,15 @@
                     {{ form.non_field_errors }}
                 {% endif %}
             {% endif %}
-            <div class="form_data login">
+            <div class="form-data login">
                 Имя пользователя <br>
                 {{ form.username }} <br>
             </div>
-            <div class="form_data login">
+            <div class="form-data login">
                 Пароль <br>
                 {{ form.password }} <br>
             </div>
-            <div class="form_data login" style="margin-top: 5vh;">
+            <div class="form-data login" style="margin-top: 5vh;">
                 <button type="submit" class="button">ОК</button>
                 <button type="reset" class="button">Очистить</button><br>
             </div>
