@@ -561,7 +561,13 @@ svg {
   border-radius: 20px;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
+.center_email {
+  padding: 5vh;
+  justify-content: space-evenly;
+}
+.center_email button {
+  height: 5vh;
+}
 @media (max-width: 768px) {
   .wrapper, .header, .mainBody, .footer, .form-wrap, .details, .cards-pages-box {
     width: 100vw;
