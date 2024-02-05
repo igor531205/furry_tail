@@ -568,6 +568,7 @@ svg {
 .center_email button {
   height: 5vh;
 }
+
 @media (max-width: 768px) {
   .wrapper, .header, .mainBody, .footer, .form-wrap, .details, .cards-pages-box {
     width: 100vw;
