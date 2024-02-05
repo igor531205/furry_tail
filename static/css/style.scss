@@ -615,6 +615,15 @@ svg{
             box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
         }
     }
+
+    &_email{
+        padding: 5vh;
+        justify-content: space-evenly;
+
+        button{
+            height: 5vh;
+        }
+    }
 }
 
 
