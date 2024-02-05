@@ -7,8 +7,10 @@
 
 {% block body %}
 <div class="mainBody">
-    <p>Поздравляем! Ваша учетная запись успешно подтверждена.</p>
-    <button class="button" onclick="window.location.href = '{% url 'users:login' %}'">Продолжить</button>
+    <div class="center center_email">
+        <p>Поздравляем! Ваша учетная запись успешно подтверждена.</p>
+        <button class="button" onclick="window.location.href = '{% url 'users:login' %}'">Продолжить</button>
+    </div>
     <img src="{% static 'img/FTBgi.png' %}" alt="" class="bgi">
 </div>
 {% endblock %}
